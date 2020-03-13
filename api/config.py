@@ -45,7 +45,7 @@ class BaseConfig:
     PROPAGATE_EXCEPTIONS = True
 
     try:
-        MONGO_URI = "mongodb+srv://duanribeiro:BJ183r32@futebol-iwbwh.mongodb.net/test?retryWrites=true&w=majority"
+        MONGO_URI = "mongodb+srv://write_user:write_pass@futebol-iwbwh.mongodb.net/test?retryWrites=true&w=majority"
 
     except KeyError as key:
         logger.critical(f'{key} env var is missing !')

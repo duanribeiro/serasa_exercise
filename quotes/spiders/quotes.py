@@ -13,7 +13,7 @@ class QuotesSpider(Spider):
 
     def __init__ (self):
         self.conn = pymongo.MongoClient(
-           "mongodb+srv://duanribeiro:BJ183r32@futebol-iwbwh.mongodb.net/test?retryWrites=true&w=majority",
+           "mongodb+srv://write_user:write_pass@futebol-iwbwh.mongodb.net/test?retryWrites=true&w=majority",
             27017
         )
 
