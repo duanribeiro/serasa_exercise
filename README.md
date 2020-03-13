@@ -1,8 +1,4 @@
 # Serasa Consumidor - Teste para Web Scrapping
-[![Python](https://img.shields.io/badge/python-3.7-blue.svg)]()
-[![Scrapy](https://img.shields.io/badge/scrapy-2.0-red.svg)]()
-[![Scrapy](https://img.shields.io/badge/mongoDB-green.svg)]()
-
 - Escolha uma empresa do seu dia a dia (internet, telefone, energia...) que possua um sistema web com **autenticação**
 - Acesse o sistema (não é necessario ter recapcha) via crawler
 - Busque todas as faturas disponiveis e salve em uma base local
@@ -31,18 +27,21 @@
 - Você **NÃO** precisa desenvolver um "frontend" (telas) para esse teste
 
 # Resolução do Exercício
+[![Python](https://img.shields.io/badge/python-3.7-blue.svg)]()
+[![Scrapy](https://img.shields.io/badge/scrapy-2.0-red.svg)]()
+[![Scrapy](https://img.shields.io/badge/mongoDB-green.svg)]()
 
 ## Introdução
 
-Primeiramente gostaria de avisar que não pude fazer com uma empresa  
-que emita boletos, porém vou aplicar os mesmos conceitos para um outro exemplo.
+Primeiramente gostaria de avisar que não pude fazer com uma empresa que  
+emita boletos, porém vou aplicar os mesmos conceitos para um outro exemplo.
 Eu vou utilizar o site: [http://quotes.toscrape.com/](http://quotes.toscrape.com/), que é um site
 desenvolvido pela própria ScrapingHub para esse tipo de teste.
 
 
 ## Código
 
-1. Run the server-side Flask app in one terminal window:
+1. Inicie a API em Flask pelo terminal:
 
     ```sh
     $ cd api
@@ -52,27 +51,25 @@ desenvolvido pela própria ScrapingHub para esse tipo de teste.
     (env)$ python3 run.py
     ```
 
-    Navigate to [http://localhost:5000/api/v1/docs](http://localhost:5000/api/v1/docs)
+    Accesse o endereço [http://localhost:5000/api/v1/docs](http://localhost:5000/api/v1/docs)
 
 
-2. Você também pode iniciar o crawler sem iniciar a API. Navegue até a raiz do projeto:
+
+2. Você também pode iniciar o crawler sem iniciar a API. Navegue até a raiz do projeto e abra o terminal:
 
     ```sh
     $ scrapy crawl quotes
     ```
 
-## Docker
-### Build
+3. Ou iniciar utilizando Docker:
 
 ```
-docker build -t flask-app .
+$ docker build -t crawler-app .
 ```
 
-### Start a New Container
-
 ```
-docker run -d \
---name flask-app \
+$ docker run -d \
+--name crawler-app \
 -p 5000:5000 \
 -e MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>" \
 flask-app
@@ -80,42 +77,29 @@ flask-app
 
 ## Swagger
 
-After the application goes up, open your browser on `localhost:5000/api/v1/docs` to see the self-documented interactive API:
+Após a aplicação iniciar, abra seu navegador em `localhost:5000/api/v1/docs`  
+ para ver a autodocumentação da API:
 
 ![](/screenshot.png)
 
 
-## Project Structure1
+### Pastas
+* `quotes/app` - Toda a implementação do Crawler está aqui.
+* `api/app` - Toda a implementação do RESTful API está aqui.
+* `api/app/v1` - Agrupamento de recursos para todos os `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
 
-The project structure is based on the official [Scaling your project](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-apis-with-reusable-namespaces) doc with some adaptations (e.g `v1` folder to agroup versioned resources).
 
+## Testes
 
+Existem dois tipos de testes na aplicação. O primeiro são os
+[Spiders Contracts](https://docs.scrapy.org/en/latest/topics/contracts.html). Acesse a pasta raiz do projeto
+pelo terminal:
 ```
-.
-
+$ scrapy check
 ```
 
-### Folders
-
-* `app` - All the RESTful API implementation is here.
-* `app/helpers` - Useful function/class helpers for all modules.
-* `app/v1` - Resource agroupment for all `v1` [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces).
-* `app/v1/resources` - All `v1` resources are implemented here.
-* `tests/unit` - Unit tests modules executed on the CI/CD pipeline.
-* `tests/integration` - Integration tests modules executed using a fake database on the CI/CD pipeline.
-* `tests/fake_data` - Fake data files ("fixtures").
-
-### Files
-
-* `app/__init__.py` - The Flask Application factory (`create_app()`) and it's configuration are done here. Your [Blueprints](https://flask-restplus.readthedocs.io/en/stable/scaling.html#use-with-blueprints) are registered here.
-* `app/v1/__init__.py` - The Flask RESTPlus API is created here with the versioned Blueprint (e.g `v1`). Your [Namespaces](https://flask-restplus.readthedocs.io/en/stable/scaling.html#multiple-namespaces) are registered here.
-* `config.py` - Config file for envs, global config vars and so on.
-* `Dockerfile` - Dockerfile used to build a Docker image (using [Docker Multistage Build](https://docs.docker.com/develop/develop-images/multistage-build/))
-* `LICENSE` - MIT License, i.e. you are free to do whatever is needed with the given code with no limits.
-* `tox.ini` - Config file for tests using [Tox](https://tox.readthedocs.io/en/latest/index.html).
-* `.dockerignore` - Lists files and directories which should be ignored while Docker build process.
-* `.gitignore` - Lists files and directories which should not be added to git repository.
-* `requirements.txt` - All project dependencies.
-* `run.py` - The Application entrypoint.
-* `conftest.py` - Common pytest [fixtures](https://docs.pytest.org/en/latest/fixture.html).
-
+O segundo é o teste da própria API.
+```
+$ cd api
+$ pytest
+```
