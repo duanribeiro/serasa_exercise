@@ -1,0 +1,15 @@
+flake8
+Scrapy
+Flask
+Flask-Cors
+flask-restplus
+gunicorn
+py
+pymongo
+pytest
+Werkzeug
+cryptography
+flask_pymongo
+flask_jwt_extended
+dnspython
+jsonschema
