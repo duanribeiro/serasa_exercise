@@ -63,17 +63,14 @@ desenvolvido pela própria ScrapingHub para esse tipo de teste.
 
 3. Ou iniciar utilizando Docker:
 
-```
-$ docker build -t crawler-app .
-```
-
-```
-$ docker run -d \
---name crawler-app \
--p 5000:5000 \
--e MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>" \
-flask-app
-```
+    ```
+    $ docker build -t crawler-app .
+    $ docker run -d \
+    --name crawler-app \
+    -p 5000:5000 \
+    -e MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>" \
+    flask-app 
+    ```
 
 ## Swagger
 
@@ -94,12 +91,12 @@ Após a aplicação iniciar, abra seu navegador em `localhost:5000/api/v1/docs`
 Existem dois tipos de testes na aplicação. O primeiro são os
 [Spiders Contracts](https://docs.scrapy.org/en/latest/topics/contracts.html). Acesse a pasta raiz do projeto
 pelo terminal:
-```
-$ scrapy check
-```
+    ```
+    $ scrapy check
+    ```
 
 O segundo é o teste da própria API.
-```
-$ cd api
-$ pytest
-```
+    ```
+    $ cd api
+    $ pytest
+    ```
