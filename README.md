@@ -74,8 +74,7 @@ desenvolvido pela própria ScrapingHub para esse tipo de teste.
 
 ## Swagger
 
-Após a aplicação iniciar, abra seu navegador em `localhost:5000/api/v1/docs`  
- para ver a autodocumentação da API:
+Após a aplicação iniciar, abra seu navegador em `localhost:5000/api/v1/docs` para ver a autodocumentação da API:
 
 ![](/screenshot.png)
 
