@@ -69,7 +69,7 @@ desenvolvido pela própria ScrapingHub para esse tipo de teste.
     --name crawler-app \
     -p 5000:5000 \
     -e MONGO_URI="<mongodb://<your_mongo_host>:27017/<your_database>" \
-    flask-app 
+    crawler-app 
     ```
 
 ## Swagger
@@ -98,5 +98,5 @@ pelo terminal:
 O segundo é o teste da própria API.
     ```
     $ cd api
-    $ pytest
+    $ pytest 
     ```
