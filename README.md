@@ -96,6 +96,7 @@ pelo terminal:
     ```
 
 O segundo é o teste da própria API.
+
     ```
     $ cd api
     $ pytest 
