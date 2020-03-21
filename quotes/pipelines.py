@@ -11,7 +11,7 @@ class ProjectPipeline(object):
 
     def __init__ (self):
         self.conn = pymongo.MongoClient(
-           "mongodb+srv://duanribeiro:BJ183r32@futebol-iwbwh.mongodb.net/test?retryWrites=true&w=majority",
+           "<mongodb://<your_mongo_host>:27017/<your_database>"
             27017
         )
 
